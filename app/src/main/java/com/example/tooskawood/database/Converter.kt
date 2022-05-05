@@ -11,7 +11,7 @@ class Converter {
         {
             str+=ingredient.ingredientName+","+ingredient.amount+","+ingredient.code+","+ingredient.description+"-"
         }
-        str=str.substring(0,str.length-2)
+        //str=str.substring(0,str.length-2)
         return str
     }
 
@@ -21,8 +21,11 @@ class Converter {
         var strs=ingredientsString.split('-')
         for (str in strs)
         {
+            if (str.isNullOrEmpty())
+                break
             var item=str.split(',')
-            list.add(Ingredients(item[0],item[1].toDouble(),item[2].toInt(),item[3]))
+            val tempIngr=Ingredients(item[0],item[1],item[2],item[3])
+            list.add(tempIngr)
         }
         return list
     }
