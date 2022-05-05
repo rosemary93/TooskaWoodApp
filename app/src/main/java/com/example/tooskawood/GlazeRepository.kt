@@ -8,7 +8,7 @@ import com.example.tooskawood.database.GlazeDao
 
 object GlazeRepository {
     lateinit var glazeDao: GlazeDao
-    lateinit var glazeList: List<Glaze>
+    var glazeList: LiveData<List<Glaze?>?>?=null
     fun initDB(context: Context) {
         val db = AppDatabase.getAppDataBase(context)
         glazeDao = db!!.glazeDao()
@@ -20,7 +20,7 @@ object GlazeRepository {
     }
 
     @JvmName("getGlazeList1")
-    fun getGlazeList():List<Glaze>{
+    fun getGlazeList():LiveData<List<Glaze?>?>?{
         return glazeDao.getAllGlazes()
     }
 

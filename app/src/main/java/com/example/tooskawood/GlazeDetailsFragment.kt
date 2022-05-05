@@ -88,8 +88,8 @@ class GlazeDetailsFragment : Fragment() {
             binding.editTextGlazeName.error = "fill here"
             return false
         }
-        for (glaze in vmodel.getAllGlazes()) {
-            if (glaze.id == binding.editTextGlazeId.text.toString().toInt()) {
+        for (glaze in vmodel.getAllGlazes()?.value!!) {
+            if (glaze?.id == binding.editTextGlazeId.text.toString().toInt()) {
                 Toast.makeText(
                     requireContext(),
                     "This id exists, please choose another number.",

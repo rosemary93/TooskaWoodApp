@@ -12,7 +12,7 @@ interface GlazeDao {
     fun findGlazeById(id:Int):Glaze
 
     @Query("SELECT * FROM Glaze")
-    fun getAllGlazes(): List<Glaze>
+    fun getAllGlazes(): LiveData<List<Glaze?>?>?
 
     @Insert
     fun insertGlaze(glaze: Glaze)

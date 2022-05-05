@@ -9,7 +9,7 @@ import com.example.tooskawood.database.Glaze
 
 class GlazeListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<GlazeListAdapter.ListViewHolder>() {
 
-   /* lateinit var itemlistener:onItemClickListener
+    lateinit var itemlistener:onItemClickListener
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
@@ -18,20 +18,19 @@ class GlazeListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<GlazeLi
     fun setOnItemClickListener(listener:onItemClickListener){
         itemlistener=listener
     }
-*/
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ListViewHolder(itemView: View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val glazeName=itemView.findViewById<TextView>(R.id.textView_ingredient)
         val glazeCode=itemView.findViewById<TextView>(R.id.textView_code)
-       /* init {
+        init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
-        }*/
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.glaze_item_view, parent, false)
-        return ListViewHolder(view)
+        return ListViewHolder(view,itemlistener)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {

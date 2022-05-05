@@ -12,8 +12,9 @@ import com.example.tooskawood.databinding.FragmentGlazesBinding
 
 class GlazesFragment : Fragment() {
     lateinit var binding: FragmentGlazesBinding
+    var adapter: GlazeListAdapter? = null
     val vmodel: MainViewModel by viewModels()
-    var mAdapterGlaze:GlazeListAdapter?=null
+    var mAdapterGlaze: GlazeListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +33,30 @@ class GlazesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAdapterGlaze = GlazeListAdapter(vmodel.getAllGlazes())
-        binding.rvGlazes.adapter = mAdapterGlaze
+        /*mAdapterGlaze = GlazeListAdapter(vmodel.getAllGlazes())
+        binding.rvGlazes.adapter = mAdapterGlaze*/
 
-       /* vmodel.glazeListLivedata?.observe(viewLifecycleOwner) {
+        vmodel.glazeListLivedata?.observe(viewLifecycleOwner) {
 
             if (it != null) {
-                adapter = ListAdapter(it)
+                adapter = GlazeListAdapter(it)
                 binding.rvGlazes.adapter = adapter
             }
 
-        }*/
+            adapter?.setOnItemClickListener(object : GlazeListAdapter.onItemClickListener {
+                override fun onItemClick(position: Int) {
+                    val id = vmodel.glazeListLivedata?.value?.get(position)?.id
+                    val action = id?.let {
+                        GlazesFragmentDirections.actionGlazesFragmentToGlazeDetailsFragment(it)
+                    }
+                    if (action != null) {
+                        findNavController().navigate(action)
+                    }
+                }
+
+            })
+
+        }
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.action_glazesFragment_to_glazeDetailsFragment)
         }

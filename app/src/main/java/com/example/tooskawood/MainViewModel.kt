@@ -8,7 +8,7 @@ import com.example.tooskawood.database.Ingredients
 
 class MainViewModel(app: Application) : AndroidViewModel(app){
 
-    var glazeListLivedata: List<Glaze>
+    var glazeListLivedata: LiveData<List<Glaze?>?>?
 
     init {
         GlazeRepository.initDB(app)
@@ -19,7 +19,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app){
         return GlazeRepository.findGlaze(id)
     }
 
-    fun getAllGlazes():List<Glaze>{
+    fun getAllGlazes():LiveData<List<Glaze?>?>?{
         return GlazeRepository.getGlazeList()
     }
 
