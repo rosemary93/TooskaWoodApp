@@ -10,6 +10,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ingredients"
         android:layout_width="match_parent"
         android:layout_height="300sp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
@@ -25,7 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="40sp"
             android:orientation="horizontal">
 
             <TextView
@@ -53,7 +54,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/editText_glaze_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -62,7 +63,7 @@
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/editText_glaze_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -89,7 +90,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="40sp"
             android:orientation="horizontal">
 
             <TextView
@@ -127,7 +128,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editText_code"
+                android:id="@+id/editText_ingredient_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -167,7 +168,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText_amount"
+                android:id="@+id/editText_ingredient_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -176,7 +177,7 @@
                 android:inputType="numberDecimal" />
 
             <EditText
-                android:id="@+id/editText_description"
+                android:id="@+id/editText_ingredient_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
