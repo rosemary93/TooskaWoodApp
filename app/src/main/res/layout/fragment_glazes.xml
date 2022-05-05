@@ -52,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="CODE"
+            android:text="کد"
             android:textSize="24sp"
-            android:textStyle="italic" />
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/textView2"
@@ -62,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="NAME"
+            android:text="نام"
             android:textSize="24sp"
-            android:textStyle="italic" />
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

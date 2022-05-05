@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tooskawood.database.Glaze
 
-class ListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class GlazeListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<GlazeListAdapter.ListViewHolder>() {
 
    /* lateinit var itemlistener:onItemClickListener
     interface onItemClickListener{
@@ -20,7 +20,7 @@ class ListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<ListAdapter.
     }
 */
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val glazeName=itemView.findViewById<TextView>(R.id.textView_name)
+        val glazeName=itemView.findViewById<TextView>(R.id.textView_ingredient)
         val glazeCode=itemView.findViewById<TextView>(R.id.textView_code)
        /* init {
             itemView.setOnClickListener {
@@ -30,7 +30,7 @@ class ListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<ListAdapter.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.glaze_item_view, parent, false)
         return ListViewHolder(view)
     }
 

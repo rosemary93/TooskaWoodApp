@@ -20,7 +20,7 @@
         tools:text="code" />
 
     <TextView
-        android:id="@+id/textView_name"
+        android:id="@+id/textView_ingredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
