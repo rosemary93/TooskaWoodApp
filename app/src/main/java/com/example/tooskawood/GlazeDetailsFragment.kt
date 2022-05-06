@@ -34,6 +34,8 @@ class GlazeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        vmodel.glazeListLivedata?.observe(viewLifecycleOwner) {}
+
         if (glazeID == -1) {
             binding.llAddGlaze.visibility = View.VISIBLE
             binding.llAddIngredient.visibility = View.GONE
@@ -88,7 +90,7 @@ class GlazeDetailsFragment : Fragment() {
             binding.editTextGlazeName.error = "fill here"
             return false
         }
-        for (glaze in vmodel.getAllGlazes()?.value!!) {
+        for (glaze in vmodel.glazeListLivedata?.value!!) {
             if (glaze?.id == binding.editTextGlazeId.text.toString().toInt()) {
                 Toast.makeText(
                     requireContext(),
