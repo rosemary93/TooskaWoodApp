@@ -14,20 +14,24 @@ import com.example.tooskawood.databinding.FragmentGlazeDetailsBinding
 
 class GlazeDetailsFragment : Fragment() {
     lateinit var binding: FragmentGlazeDetailsBinding
-    val vmodel: MainViewModel by viewModels()
-    var glazeID = -1
-    lateinit var glaze: Glaze
+    var adapter:IngredientListAdapter?=null
+    private val vmodel: MainViewModel by viewModels()
+    private var recievedGlazeID = -1
+    var glaze: Glaze?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            glazeID = it.getInt("id")
+            recievedGlazeID = it.getInt("id")
+            if (recievedGlazeID!=-1){
+                glaze=vmodel.findGlazeBiID(recievedGlazeID)
+            }
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGlazeDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,7 +40,10 @@ class GlazeDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         vmodel.glazeListLivedata?.observe(viewLifecycleOwner) {}
 
-        if (glazeID == -1) {
+        adapter = glaze?.ingredientList?.let { IngredientListAdapter(it) }
+        binding.rvIngredients.adapter = adapter
+
+        if (recievedGlazeID == -1) {
             binding.llAddGlaze.visibility = View.VISIBLE
             binding.llAddIngredient.visibility = View.GONE
             binding.rvIngredients.visibility = View.GONE
@@ -44,7 +51,7 @@ class GlazeDetailsFragment : Fragment() {
             binding.llAddGlaze.visibility = View.GONE
             binding.llAddIngredient.visibility = View.VISIBLE
             binding.rvIngredients.visibility = View.VISIBLE
-            glaze=vmodel.findGlazeBiID(glazeID)
+            glaze=vmodel.findGlazeBiID(recievedGlazeID)
         }
 
         binding.buttonAddGlaze.setOnClickListener {
@@ -55,8 +62,8 @@ class GlazeDetailsFragment : Fragment() {
                 val tempGlaze=Glaze(binding.editTextGlazeId.text.toString().toInt(),
                 binding.editTextGlazeName.text.toString(), arrayListOf())
                 vmodel.addGlaze(tempGlaze)
-                glazeID=tempGlaze.id
-                glaze=vmodel.findGlazeBiID(glazeID)
+                glaze=vmodel.findGlazeBiID(tempGlaze.id)
+
             }
 
         }
@@ -64,7 +71,7 @@ class GlazeDetailsFragment : Fragment() {
         binding.buttonAddIngredient.setOnClickListener {
 
             if (areValidIngredientFields()){
-                val glazeIngredients=glaze.ingredientList as ArrayList<Ingredients>
+                val glazeIngredients=glaze?.ingredientList as ArrayList<Ingredients>
                 var tempCode="0"
                 var tempDescr="empty"
                 if (!binding.editTextIngredientCode.text.isNullOrBlank())
@@ -75,8 +82,12 @@ class GlazeDetailsFragment : Fragment() {
                 binding.editTextIngredientAmount.text.toString(),
                 tempCode,tempDescr))
 
-                glaze= Glaze(glaze.id,glaze.name,glazeIngredients)
-                vmodel.updateGlaze(glaze)
+                adapter = IngredientListAdapter(glazeIngredients)
+                binding.rvIngredients.adapter = adapter
+                //adapter!!.dataset=glazeIngredients
+
+                glaze= glaze?.let { it1 -> Glaze(it1.id, glaze!!.name,glazeIngredients) }
+                glaze?.let { it1 -> vmodel.updateGlaze(it1) }
             }
         }
     }
@@ -116,6 +127,19 @@ class GlazeDetailsFragment : Fragment() {
             return false
         }
         return true
+    }
+
+    fun convert(scale:Int):List<Double>{
+        var total=0.0
+        val convertedList= mutableListOf<Double>()
+        for(ingredient in glaze?.ingredientList!!){
+            total+=ingredient.amount.toDouble()
+        }
+        for(ingredient in glaze?.ingredientList!!){
+            val converted=(ingredient.amount.toDouble()*scale)/total
+            convertedList.add(converted)
+        }
+        return convertedList
     }
 
 }

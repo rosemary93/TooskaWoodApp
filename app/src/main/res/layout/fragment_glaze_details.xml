@@ -9,6 +9,30 @@
     tools:context=".GlazeDetailsFragment">
 
 
+    <LinearLayout
+        android:id="@+id/ll_convert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextNumberDecimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btn_convert"
+            android:layout_width="39dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_corner_shape"
+            android:text="تبدیل"
+            android:textSize="20sp" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ingredients"
         android:layout_width="match_parent"
@@ -36,6 +60,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="کد لعاب"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,6 +70,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="نام لعاب"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -78,7 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="اضافه کردن لعاب" />
+            android:text="اضافه کردن لعاب"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,6 +127,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="ماده تشکیل دهنده"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -109,6 +137,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="کد"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -149,6 +178,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="مقدار"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -158,6 +188,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="توضیحات"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -191,7 +222,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="اضافه کردن عنصر" />
+            android:text="اضافه کردن عنصر"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

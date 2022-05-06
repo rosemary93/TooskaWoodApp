@@ -9,7 +9,7 @@ import com.example.tooskawood.database.Ingredients
 
 class IngredientListAdapter(var dataset: List<Ingredients?>) : RecyclerView.Adapter<IngredientListAdapter.ListViewHolder>() {
 
-    lateinit var itemlistener:onItemClickListener
+    /*lateinit var itemlistener:onItemClickListener
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
@@ -17,22 +17,22 @@ class IngredientListAdapter(var dataset: List<Ingredients?>) : RecyclerView.Adap
 
     fun setOnItemClickListener(listener:onItemClickListener){
         itemlistener=listener
-    }
-    class ListViewHolder(itemView: View, listener:onItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    }*/
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ingredientName=itemView.findViewById<TextView>(R.id.tv_ingredient)
         val ingredientCode=itemView.findViewById<TextView>(R.id.tv_ingredient_code)
         val ingredientAmount=itemView.findViewById<TextView>(R.id.tv_ingredient_amount)
         val ingredientDescr=itemView.findViewById<TextView>(R.id.tv_ingredient_desc)
-        init {
+       /* init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.ingredient_item_view, parent, false)
-        return ListViewHolder(view,itemlistener)
+        return ListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
