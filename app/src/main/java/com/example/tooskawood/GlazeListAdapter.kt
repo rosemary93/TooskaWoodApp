@@ -19,8 +19,8 @@ class GlazeListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<GlazeLi
         itemlistener=listener
     }
     class ListViewHolder(itemView: View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView) {
-        val glazeName=itemView.findViewById<TextView>(R.id.textView_ingredient)
-        val glazeCode=itemView.findViewById<TextView>(R.id.textView_code)
+        val glazeName=itemView.findViewById<TextView>(R.id.tv_glaze_name)
+        val glazeCode=itemView.findViewById<TextView>(R.id.tv_glaze_code)
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

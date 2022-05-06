@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/textView_ingredient"
+        android:id="@+id/tv_ingredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -22,7 +22,7 @@
         tools:text="ingredient" />
 
     <TextView
-        android:id="@+id/textView_code"
+        android:id="@+id/tv_ingredient_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -32,7 +32,7 @@
         tools:text="code" />
 
     <TextView
-        android:id="@+id/textView_amount"
+        android:id="@+id/tv_ingredient_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -43,7 +43,7 @@
         tools:text="amount" />
 
     <TextView
-        android:id="@+id/textView_desc"
+        android:id="@+id/tv_ingredient_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
