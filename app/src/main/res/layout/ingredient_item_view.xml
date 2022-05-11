@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5sp"
     android:background="@drawable/round_corner_shape"
+    android:orientation="vertical"
     android:padding="15sp">
 
+
+    <ImageButton
+        android:id="@+id/ibtn_edit"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:layout_gravity="end"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:background="@drawable/round_corner_shape"
+        android:backgroundTint="#50D6CB"
+        android:padding="5sp"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3sp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -41,6 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3sp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -88,6 +102,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3sp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -116,6 +131,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3sp"
         android:layout_weight="1"
         android:orientation="horizontal">
 

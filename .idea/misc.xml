@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/mjpou/AndroidStudioProjects/TooskaWood/app/src/main/res/drawable/round_corner_shape.xml" value="0.121" />
+        <entry key="..\:/Users/mjpou/AndroidStudioProjects/TooskaWood/app/src/main/res/layout/fragment_edit_ingredient.xml" value="0.25" />
         <entry key="..\:/Users/mjpou/AndroidStudioProjects/TooskaWood/app/src/main/res/layout/fragment_glaze_details.xml" value="0.25" />
         <entry key="..\:/Users/mjpou/AndroidStudioProjects/TooskaWood/app/src/main/res/layout/fragment_glazes.xml" value="0.18177083333333333" />
         <entry key="..\:/Users/mjpou/AndroidStudioProjects/TooskaWood/app/src/main/res/layout/glaze_item_view.xml" value="0.18518518518518517" />

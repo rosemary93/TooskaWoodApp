@@ -11,7 +11,7 @@ data class Glaze(
 )
 
 
-class Ingredients(
+data class Ingredients(
     var ingredientName: String,
     var amount: String,
     var code: String = "0",

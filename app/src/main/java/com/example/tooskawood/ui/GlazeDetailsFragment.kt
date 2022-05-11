@@ -18,16 +18,17 @@ import com.example.tooskawood.databinding.FragmentGlazeDetailsBinding
 
 class GlazeDetailsFragment : Fragment() {
     lateinit var binding: FragmentGlazeDetailsBinding
-    var adapter: IngredientListAdapter?=null
+    var adapter: IngredientListAdapter? = null
     private val vmodel: MainViewModel by viewModels()
     private var recievedGlazeID = -1
-    var glaze: Glaze?=null
+    private var editPosition = -10
+    var glaze: Glaze? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             recievedGlazeID = it.getInt("id")
-            if (recievedGlazeID!=-1){
-                glaze=vmodel.findGlazeBiID(recievedGlazeID)
+            if (recievedGlazeID != -1) {
+                glaze = vmodel.findGlazeBiID(recievedGlazeID)
             }
         }
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
@@ -58,33 +59,37 @@ class GlazeDetailsFragment : Fragment() {
     }
 
     private fun initViews() {
-        adapter = glaze?.ingredientList?.let { IngredientListAdapter(it) }
+        adapter = glaze?.ingredientList?.let { IngredientListAdapter(it as MutableList<Ingredients>) }
         binding.rvIngredients.adapter = adapter
+
+
 
         if (recievedGlazeID == -1) {
             binding.llAddGlaze.visibility = View.VISIBLE
             binding.llAddIngredient.visibility = View.GONE
             binding.rvIngredients.visibility = View.GONE
-            binding.llConvert.visibility=View.GONE
+            binding.llConvert.visibility = View.GONE
         } else {
             binding.llAddGlaze.visibility = View.GONE
             binding.llAddIngredient.visibility = View.VISIBLE
             binding.rvIngredients.visibility = View.VISIBLE
-            glaze=vmodel.findGlazeBiID(recievedGlazeID)
+            glaze = vmodel.findGlazeBiID(recievedGlazeID)
         }
     }
 
-    private fun setButtonsListeners(){
+    private fun setButtonsListeners() {
         binding.buttonAddGlaze.setOnClickListener {
             if (areValidGlazeFields()) {
                 binding.llAddGlaze.visibility = View.GONE
                 binding.llAddIngredient.visibility = View.VISIBLE
                 binding.rvIngredients.visibility = View.VISIBLE
-                binding.llConvert.visibility=View.VISIBLE
-                val tempGlaze=Glaze(binding.editTextGlazeId.text.toString().toInt(),
-                    binding.editTextGlazeName.text.toString(), arrayListOf())
+                binding.llConvert.visibility = View.VISIBLE
+                val tempGlaze = Glaze(
+                    binding.editTextGlazeId.text.toString().toInt(),
+                    binding.editTextGlazeName.text.toString(), arrayListOf()
+                )
                 vmodel.addGlaze(tempGlaze)
-                glaze=vmodel.findGlazeBiID(tempGlaze.id)
+                glaze = vmodel.findGlazeBiID(tempGlaze.id)
 
             }
 
@@ -92,23 +97,29 @@ class GlazeDetailsFragment : Fragment() {
 
         binding.buttonAddIngredient.setOnClickListener {
 
-            if (areValidIngredientFields()){
-                val glazeIngredients=glaze?.ingredientList as ArrayList<Ingredients>
-                var tempCode="0"
-                var tempDescr="فاقد توضیحات"
+            if (areValidIngredientFields()) {
+                val glazeIngredients = glaze?.ingredientList as ArrayList<Ingredients>
+                var tempCode = "0"
+                var tempDescr = "فاقد توضیحات"
                 if (!binding.editTextIngredientCode.text.isNullOrBlank())
-                    tempCode=binding.editTextIngredientCode.text.toString()
+                    tempCode = binding.editTextIngredientCode.text.toString()
                 if (!binding.editTextIngredientDescription.text.isNullOrBlank())
-                    tempDescr=binding.editTextIngredientDescription.text.toString()
-                glazeIngredients.add(Ingredients(binding.editTextIngredient.text.toString(),
-                    binding.editTextIngredientAmount.text.toString(),
-                    tempCode,tempDescr))
+                    tempDescr = binding.editTextIngredientDescription.text.toString()
 
-                adapter = IngredientListAdapter(glazeIngredients)
+                glazeIngredients.add(
+                    Ingredients(
+                        binding.editTextIngredient.text.toString(),
+                        binding.editTextIngredientAmount.text.toString(),
+                        tempCode, tempDescr
+                    )
+                )
+
+
+                adapter = IngredientListAdapter(glazeIngredients as MutableList<Ingredients>)
                 binding.rvIngredients.adapter = adapter
 
 
-                glaze= glaze?.let { it1 -> Glaze(it1.id, glaze!!.name,glazeIngredients) }
+                glaze = glaze?.let { it1 -> Glaze(it1.id, glaze!!.name, glazeIngredients) }
                 glaze?.let { it1 -> vmodel.updateGlaze(it1) }
 
                 clearEditTexts()
@@ -116,13 +127,16 @@ class GlazeDetailsFragment : Fragment() {
         }
 
         binding.btnConvert.setOnClickListener {
-            if (glaze?.ingredientList?.isNotEmpty()!!)
-            {
+            if (glaze?.ingredientList?.isNotEmpty()!!) {
                 if (!binding.etScale.text.isNullOrBlank()) {
-                    val tempGlaze=vmodel.getConvertedGlaze(glaze!!.id, binding.etScale.text.toString().toDouble())
+                    val tempGlaze = vmodel.getConvertedGlaze(
+                        glaze!!.id,
+                        binding.etScale.text.toString().toDouble()
+                    )
                     vmodel.updateGlaze(tempGlaze)
 
-                    adapter = IngredientListAdapter(tempGlaze.ingredientList)
+                    adapter =
+                        IngredientListAdapter(tempGlaze.ingredientList as MutableList<Ingredients>)
                     binding.rvIngredients.adapter = adapter
 
                 }
@@ -154,38 +168,36 @@ class GlazeDetailsFragment : Fragment() {
         return true
     }
 
-    private fun areValidIngredientFields():Boolean{
-        if (binding.editTextIngredient.text.isNullOrBlank()){
-            binding.editTextIngredient.error="فیلد اجباری"
+    private fun areValidIngredientFields(): Boolean {
+        if (binding.editTextIngredient.text.isNullOrBlank()) {
+            binding.editTextIngredient.error = "فیلد اجباری"
             return false
         }
 
-        if (binding.editTextIngredientAmount.text.isNullOrBlank())
-        {
-            binding.editTextIngredientAmount.error="فیلد اجباری"
+        if (binding.editTextIngredientAmount.text.isNullOrBlank()) {
+            binding.editTextIngredientAmount.error = "فیلد اجباری"
             return false
         }
         return true
     }
 
-    private fun clearEditTexts(){
+    private fun clearEditTexts() {
         binding.editTextIngredient.setText(" ")
         binding.editTextIngredientAmount.setText(" ")
         binding.editTextIngredientCode.setText(" ")
         binding.editTextIngredientDescription.setText(" ")
     }
 
-     fun updateConvertedAmount(){
-        val tempGlaze=glaze
+    fun updateConvertedAmount() {
+        val tempGlaze = glaze
         if (tempGlaze != null) {
             for (ingredient in tempGlaze.ingredientList)
-                ingredient.convertedAmount=" "
+                ingredient.convertedAmount = " "
         }
         if (tempGlaze != null) {
             vmodel.updateGlaze(tempGlaze)
         }
     }
-
 
 
 }

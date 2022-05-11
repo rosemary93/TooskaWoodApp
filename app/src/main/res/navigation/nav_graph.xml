@@ -27,5 +27,21 @@
         <action
             android:id="@+id/action_glazeDetailsFragment_to_glazesFragment"
             app:destination="@id/glazesFragment" />
+        <action
+            android:id="@+id/action_glazeDetailsFragment_to_editIngredientFragment"
+            app:destination="@id/editIngredientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editIngredientFragment"
+        android:name="com.example.tooskawood.ui.EditIngredientFragment"
+        android:label="fragment_edit_ingredient"
+        tools:layout="@layout/fragment_edit_ingredient" >
+        <action
+            android:id="@+id/action_editIngredientFragment_to_glazeDetailsFragment"
+            app:destination="@id/glazeDetailsFragment" />
+        <argument
+            android:name="glazeInfo"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
 </navigation>
