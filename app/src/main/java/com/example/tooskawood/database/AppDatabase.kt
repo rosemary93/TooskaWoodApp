@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Glaze::class], version = 1)
+@Database(entities = [Glaze::class], version = 2)
 @TypeConverters(Converter::class)
 abstract class AppDatabase  : RoomDatabase() {
     abstract fun glazeDao(): GlazeDao

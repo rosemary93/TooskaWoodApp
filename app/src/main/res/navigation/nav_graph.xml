@@ -24,5 +24,8 @@
         android:name="id"
         app:argType="integer"
         android:defaultValue="-1"/>
-</fragment>
+        <action
+            android:id="@+id/action_glazeDetailsFragment_to_glazesFragment"
+            app:destination="@id/glazesFragment" />
+    </fragment>
 </navigation>

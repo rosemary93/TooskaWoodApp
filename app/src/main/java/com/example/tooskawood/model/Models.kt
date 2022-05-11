@@ -15,6 +15,7 @@ class Ingredients(
     var ingredientName: String,
     var amount: String,
     var code: String = "0",
-    var description: String = "empty"
+    var description: String = "فاقد توضیحات",
+    var convertedAmount:String=" "
 )
 

@@ -19,16 +19,24 @@ class IngredientListAdapter(var dataset: List<Ingredients?>) : RecyclerView.Adap
     fun setOnItemClickListener(listener:onItemClickListener){
         itemlistener=listener
     }*/
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ingredientName=itemView.findViewById<TextView>(R.id.tv_ingredient)
         val ingredientCode=itemView.findViewById<TextView>(R.id.tv_ingredient_code)
         val ingredientAmount=itemView.findViewById<TextView>(R.id.tv_ingredient_amount)
         val ingredientDescr=itemView.findViewById<TextView>(R.id.tv_ingredient_desc)
+        val ingredientConvertedAmnt=itemView.findViewById<TextView>(R.id.tv_ingredient_converted_amnt)
        /* init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }*/
+        fun bind(position: Int){
+           ingredientName.text=dataset[position]?.ingredientName
+           ingredientCode.text=dataset[position]?.code
+           ingredientAmount.text=dataset[position]?.amount
+           ingredientDescr.text=dataset[position]?.description
+           ingredientConvertedAmnt.text=dataset[position]?.convertedAmount
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -37,10 +45,7 @@ class IngredientListAdapter(var dataset: List<Ingredients?>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.ingredientName.text=dataset[position]?.ingredientName
-        holder.ingredientCode.text=dataset[position]?.code
-        holder.ingredientAmount.text=dataset[position]?.amount
-        holder.ingredientDescr.text=dataset[position]?.description
+       holder.bind(position)
     }
 
     override fun getItemCount(): Int = dataset.size

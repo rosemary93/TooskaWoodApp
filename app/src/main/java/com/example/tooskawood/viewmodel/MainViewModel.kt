@@ -45,4 +45,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app){
         addGlaze(Glaze(7, "G", ingrd))
         addGlaze(Glaze(8, "H", ingrd))
     }
+
+    fun getConvertedGlaze(glazeId:Int, scale:Double):Glaze{
+        val glaze=findGlazeBiID(glazeId)
+        var total=0.0
+        for(ingredient in glaze.ingredientList){
+            total+=ingredient.amount.toDouble()
+        }
+        val ingredientList=glaze.ingredientList
+        for(ingredient in ingredientList){
+            val converted=(ingredient.amount.toDouble()*scale)/total
+            ingredient.convertedAmount=converted.toString()
+        }
+        return Glaze(glaze.id,glaze.name,ingredientList)
+
+    }
 }
