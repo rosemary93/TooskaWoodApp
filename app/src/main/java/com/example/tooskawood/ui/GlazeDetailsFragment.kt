@@ -1,4 +1,4 @@
-package com.example.tooskawood
+package com.example.tooskawood.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.example.tooskawood.viewmodel.MainViewModel
 import com.example.tooskawood.database.Glaze
 import com.example.tooskawood.database.Ingredients
 import com.example.tooskawood.databinding.FragmentGlazeDetailsBinding
@@ -14,7 +15,7 @@ import com.example.tooskawood.databinding.FragmentGlazeDetailsBinding
 
 class GlazeDetailsFragment : Fragment() {
     lateinit var binding: FragmentGlazeDetailsBinding
-    var adapter:IngredientListAdapter?=null
+    var adapter: IngredientListAdapter?=null
     private val vmodel: MainViewModel by viewModels()
     private var recievedGlazeID = -1
     var glaze: Glaze?=null

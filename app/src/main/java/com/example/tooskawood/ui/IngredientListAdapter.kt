@@ -1,10 +1,11 @@
-package com.example.tooskawood
+package com.example.tooskawood.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tooskawood.R
 import com.example.tooskawood.database.Ingredients
 
 class IngredientListAdapter(var dataset: List<Ingredients?>) : RecyclerView.Adapter<IngredientListAdapter.ListViewHolder>() {

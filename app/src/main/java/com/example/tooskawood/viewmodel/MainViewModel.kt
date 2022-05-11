@@ -1,8 +1,9 @@
-package com.example.tooskawood
+package com.example.tooskawood.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.tooskawood.repositories.GlazeRepository
 import com.example.tooskawood.database.Glaze
 import com.example.tooskawood.database.Ingredients
 

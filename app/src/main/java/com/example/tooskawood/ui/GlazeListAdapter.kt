@@ -1,24 +1,25 @@
-package com.example.tooskawood
+package com.example.tooskawood.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tooskawood.R
 import com.example.tooskawood.database.Glaze
 
 class GlazeListAdapter(var dataset: List<Glaze?>) : RecyclerView.Adapter<GlazeListAdapter.ListViewHolder>() {
 
-    lateinit var itemlistener:onItemClickListener
+    lateinit var itemlistener: onItemClickListener
     interface onItemClickListener{
 
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener:onItemClickListener){
+    fun setOnItemClickListener(listener: onItemClickListener){
         itemlistener=listener
     }
-    class ListViewHolder(itemView: View,listener:onItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    class ListViewHolder(itemView: View,listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val glazeName=itemView.findViewById<TextView>(R.id.tv_glaze_name)
         val glazeCode=itemView.findViewById<TextView>(R.id.tv_glaze_code)
         init {
