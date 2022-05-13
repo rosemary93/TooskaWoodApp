@@ -59,8 +59,16 @@ class GlazeDetailsFragment : Fragment() {
     }
 
     private fun initViews() {
-        adapter = glaze?.ingredientList?.let { IngredientListAdapter(it as MutableList<Ingredients>) }
+        adapter = IngredientListAdapter { ingredient ->
+            val strArg = "${glaze?.id},${ingredient.ingredientName}"
+            val action =
+                GlazeDetailsFragmentDirections.actionGlazeDetailsFragmentToEditIngredientFragment(
+                    strArg
+                )
+            findNavController().navigate(action)
+        }
         binding.rvIngredients.adapter = adapter
+        adapter!!.submitList(glaze?.ingredientList)
 
 
 
@@ -115,7 +123,7 @@ class GlazeDetailsFragment : Fragment() {
                 )
 
 
-                adapter = IngredientListAdapter(glazeIngredients as MutableList<Ingredients>)
+                adapter?.submitList(glazeIngredients)
                 binding.rvIngredients.adapter = adapter
 
 
@@ -135,9 +143,10 @@ class GlazeDetailsFragment : Fragment() {
                     )
                     vmodel.updateGlaze(tempGlaze)
 
-                    adapter =
-                        IngredientListAdapter(tempGlaze.ingredientList as MutableList<Ingredients>)
-                    binding.rvIngredients.adapter = adapter
+                    adapter?.submitList(tempGlaze.ingredientList)
+//                    adapter =
+//                        IngredientListAdapter(tempGlaze.ingredientList as MutableList<Ingredients>)
+//                    binding.rvIngredients.adapter = adapter
 
                 }
             }

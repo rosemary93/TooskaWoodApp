@@ -19,13 +19,14 @@ class EditIngredientFragment : Fragment() {
     private val vmodel: MainViewModel by viewModels()
     var glazeId = -1
     var ingredientPosition = -1
-
+    var ingredientName=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             val argStrArr = it.getString("glazeInfo")!!.split(',')
             glazeId = argStrArr[0].toInt()
-            ingredientPosition = argStrArr[1].toInt()
+            ingredientName=argStrArr[1]
+
         }
     }
 
@@ -34,6 +35,7 @@ class EditIngredientFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditIngredientBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -41,6 +43,7 @@ class EditIngredientFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var glaze = vmodel.findGlazeBiID(glazeId)
+        ingredientPosition = findIngredientByName(ingredientName,glaze)
         val glazeIngredient = glaze.ingredientList[ingredientPosition]
         val glazeIngredientList = glaze.ingredientList as ArrayList<Ingredients>
         binding.etIngName.setText(glazeIngredient.ingredientName)
@@ -68,14 +71,16 @@ class EditIngredientFragment : Fragment() {
                         )
                 glaze = Glaze(glazeId, glaze.name, glazeIngredientList)
                 vmodel.updateGlaze(glaze)
-                findNavController().navigate(R.id.action_editIngredientFragment_to_glazeDetailsFragment)
+                val action=EditIngredientFragmentDirections.actionEditIngredientFragmentToGlazeDetailsFragment(glazeId)
+                findNavController().navigate(action)
             }
         }
 
         binding.btnDeleteIng.setOnClickListener {
             glazeIngredientList.removeAt(ingredientPosition)
             vmodel.updateGlaze(Glaze(glazeId, glaze.name, glazeIngredientList))
-            findNavController().navigate(R.id.action_editIngredientFragment_to_glazeDetailsFragment)
+            val action=EditIngredientFragmentDirections.actionEditIngredientFragmentToGlazeDetailsFragment(glazeId)
+            findNavController().navigate(action)
         }
 
 
@@ -92,6 +97,16 @@ class EditIngredientFragment : Fragment() {
             return false
         }
         return true
+    }
+
+    fun findIngredientByName(name:String,glaze: Glaze):Int{
+        var index=0
+        for (i in 0 until glaze.ingredientList.size)
+        {
+            if (glaze.ingredientList[i].ingredientName==name)
+                return i
+        }
+        return index
     }
 
 }
